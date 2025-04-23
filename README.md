@@ -80,18 +80,17 @@ npm run dev
 
 ## 🛠️ Tech Highlights
 
-| Technology                                                                                      | Description                                         |
-| ----------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| ⚛️ **ReactJS**                                                                                  | Frontend library for building user interfaces       |
-| 🧠 **Redux**                                                                                    | State management for predictable application state  |
-| 🎯 **Redux-Saga**                                                                               | Middleware for handling side effects like API calls |
-| 🎨 **SCSS**                                                                                     | CSS preprocessor for modular and reusable styles    |
-| 🔐 **JWT Auth**                                                                                 | Secure authentication using JSON Web Tokens         |
-| 🚦 **React Router**                                                                             | Client-side routing for navigation                  |
-| 🌐 **Axios**                                                                                    | Promise-based HTTP client for API requests          |
-| 🛡️ **ESLint**                                                                                   | Linting tool for maintaining code quality           |
-| 📦 **Webpack**                                                                                  | Module bundler for optimizing the build process     |
-| ----------------------------------------------------------------------------------------------- |
+| Technology          | Description                                         |
+| ------------------- | --------------------------------------------------- |
+| ⚛️ **ReactJS**      | Frontend library for building user interfaces       |
+| 🧠 **Redux**        | State management for predictable application state  |
+| 🎯 **Redux-Saga**   | Middleware for handling side effects like API calls |
+| 🎨 **SCSS**         | CSS preprocessor for modular and reusable styles    |
+| 🔐 **JWT Auth**     | Secure authentication using JSON Web Tokens         |
+| 🚦 **React Router** | Client-side routing for navigation                  |
+| 🌐 **Axios**        | Promise-based HTTP client for API requests          |
+| 🛡️ **ESLint**       | Linting tool for maintaining code quality           |
+| 📦 **Webpack**      | Module bundler for optimizing the build process     |
 
 ### Why These Technologies?
 
