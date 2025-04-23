@@ -1,0 +1,89 @@
+.login-page {
+  display: flex;
+  height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 0 2rem;
+  background-color: #fff;
+  .login-left {
+    padding: 4rem;
+    padding-left: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ffffff;
+    width: 40%;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #000;
+    }
+
+    .login-description {
+      margin-bottom: 2rem;
+      color: #6c6c6c;
+      font-size: 18px;
+      font-weight: 400;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 70%;
+
+      input {
+        padding: 0.75rem 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        font-size: 1rem;
+        background-color: #fff;
+        height: 30px;
+        color: #000;
+        font-size: 18px;
+      }
+
+      button {
+        padding: 1.5rem;
+        font-size: 1rem;
+        background-color: #0073e6;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 1rem;
+
+        &:disabled {
+          background-color: #a0c4ff;
+          cursor: not-allowed;
+        }
+      }
+    }
+    .error {
+      color: red;
+      margin-top: 1rem;
+    }
+    .sub-text {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #777;
+    }
+  }
+
+  .login-right {
+    width: 60%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .illustration {
+      width: 700px;
+      height: 500px;
+      background-image: url("/LoginPage.jpg"); // make sure the file is public or in /public/
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+    }
+  }
+}
