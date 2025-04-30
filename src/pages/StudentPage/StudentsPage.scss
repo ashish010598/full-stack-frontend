@@ -1,0 +1,97 @@
+.students-page {
+    background-color: #242424;
+    color: #f1f1f1;
+    padding: 2rem;
+    min-height: 100vh;
+  
+    h2, h3 {
+      color: #ffffff;
+      margin-bottom: 1.5rem;
+    }
+  
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2rem;
+  
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        input, button {
+          padding: 0.6rem;
+          border: none;
+          border-radius: 5px;
+          font-size: 1rem;
+        }
+  
+        input {
+          background: #333;
+          color: white;
+          border: 1px solid #555;
+        }
+  
+        button {
+          background: #0073e6;
+          color: white;
+          cursor: pointer;
+          transition: 0.2s;
+  
+          &:hover {
+            background: #005bb5;
+          }
+        }
+      }
+  
+      .upload-box {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+  
+        input[type="file"] {
+          color: white;
+        }
+  
+        button {
+          padding: 0.6rem;
+          background-color: #28a745;
+          border: none;
+          color: white;
+          border-radius: 5px;
+          cursor: pointer;
+  
+          &:disabled {
+            background-color: #888;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  
+    .table-wrapper {
+      overflow-x: auto;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #333;
+  
+      th, td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid #444;
+      }
+  
+      th {
+        background-color: #444;
+        color: #f1f1f1;
+      }
+  
+      tr:hover {
+        background-color: #3a3a3a;
+      }
+    }
+  }
+  

@@ -19,6 +19,7 @@ const Sidebar = () => {
   const activeStyle = {
     backgroundColor: "#eee",
     fontWeight: "bold",
+    paddingLeft: "5px",
   };
 
   return (
@@ -31,7 +32,7 @@ const Sidebar = () => {
         boxSizing: "border-box",
       }}
     >
-      <h3>💉 Portal</h3>
+      <h3 style={{ color: "#000", marginBottom: "50px" }}>💉 Portal</h3>
       {menu.map((item, index) => (
         <div key={index} style={{ margin: "1rem 0" }}>
           {item.label === "Logout" ? (
@@ -43,6 +44,8 @@ const Sidebar = () => {
                 color: location.pathname === item.path ? "#000" : "#0073e6",
                 cursor: "pointer",
                 fontWeight: location.pathname === item.path ? "bold" : "normal",
+                padding: "0px",
+                paddingLeft: "5px",
               }}
             >
               {item.label}
@@ -50,7 +53,11 @@ const Sidebar = () => {
           ) : (
             <Link
               to={item.path}
-              style={location.pathname === item.path ? activeStyle : {}}
+              style={
+                location.pathname === item.path
+                  ? activeStyle
+                  : { paddingLeft: "5px" }
+              }
             >
               {item.label}
             </Link>
