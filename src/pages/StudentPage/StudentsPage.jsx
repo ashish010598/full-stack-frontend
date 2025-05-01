@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStudentsRequest } from "../../redux/student/actions";
-import axios from "axios";
 
 import "./StudentsPage.scss";
 
@@ -10,11 +11,31 @@ const StudentsPage = () => {
   const { students, loading } = useSelector((state) => state.students);
   const [form, setForm] = useState({ name: "", class: "", studentId: "" });
   const [file, setFile] = useState(null);
+  const [selectedStudent, setSelectedStudent] = useState(null);
+  const [selectedStudentForVaccination, setSelectedStudentForVaccination] =
+    useState(null);
+  const [activeDrives, setActiveDrives] = useState([]);
+  const [selectedDriveId, setSelectedDriveId] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
   const token = localStorage.getItem("token");
 
   useEffect(() => {
     dispatch(fetchStudentsRequest());
-  }, [dispatch]);
+    const fetchDrives = async () => {
+      const res = await axios.get("http://localhost:8081/api/drives", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const today = new Date().toDateString();
+      const eligibleDrivesForStudent = res.data.filter(
+        (d) =>
+          new Date(d.date).toDateString() === today &&
+          d.applicableClasses.includes(selectedStudentForVaccination.class)
+      );
+      setActiveDrives(eligibleDrivesForStudent);
+    };
+    fetchDrives();
+  }, [selectedStudentForVaccination, dispatch, token]);
 
   const handleAddStudent = async (e) => {
     e.preventDefault();
@@ -44,6 +65,37 @@ const StudentsPage = () => {
       setFile(null);
     } catch (err) {
       console.error("CSV upload failed", err);
+    }
+  };
+
+  const closeModal = () => {
+    setSelectedStudent(null);
+  };
+
+  const filteredStudents = students.filter(
+    (s) =>
+      s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      s.studentId.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleMarkVaccinated = async () => {
+    if (!selectedDriveId) return;
+    try {
+      await axios.put(
+        `http://localhost:8081/api/students/vaccinate/${selectedStudentForVaccination._id}`,
+        {
+          vaccineName: activeDrives.find((d) => d._id === selectedDriveId)
+            .vaccineName,
+          date: new Date(),
+          driveId: selectedDriveId,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      dispatch(fetchStudentsRequest());
+      setSelectedStudentForVaccination(null);
+      setSelectedDriveId("");
+    } catch (err) {
+      console.error("Vaccination failed:", err);
     }
   };
 
@@ -91,6 +143,13 @@ const StudentsPage = () => {
           </button>
         </div>
       </div>
+      <input
+        type="text"
+        placeholder="Search by name or student ID"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="search-input"
+      />
 
       <h3>📋 Student List</h3>
 
@@ -105,21 +164,100 @@ const StudentsPage = () => {
                 <th>Class</th>
                 <th>Student ID</th>
                 <th>Vaccinations</th>
+                <th>Mark Vaccinate</th>
               </tr>
             </thead>
             <tbody>
-              {students.map((s, index) => (
+              {filteredStudents.map((s, index) => (
                 <tr key={index}>
                   <td>{s.name}</td>
                   <td>{s.class}</td>
                   <td>{s.studentId}</td>
-                  <td>{s.vaccinationRecords?.length || 0}</td>
+                  <td>
+                    <span
+                      className="vaccination-count"
+                      onClick={() => setSelectedStudent(s)}
+                      style={{
+                        cursor: "pointer",
+                        color: "#00c6ff",
+                        textDecoration: "underline",
+                      }}
+                    >
+                      {s.vaccinationRecords?.length || 0}
+                    </span>
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => setSelectedStudentForVaccination(s)}
+                      className="vaccinate-btn"
+                    >
+                      ✅ Vaccinate
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         )}
       </div>
+      {selectedStudent && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <h3>🧾 Vaccination Records</h3>
+            <p>
+              <strong>{selectedStudent.name}</strong>
+            </p>
+
+            {selectedStudent.vaccinationRecords?.length > 0 ? (
+              <table className="vaccination-table">
+                <thead>
+                  <tr>
+                    <th>Vaccine Name</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {selectedStudent.vaccinationRecords.map((v, i) => (
+                    <tr key={i}>
+                      <td>{v.vaccineName}</td>
+                      <td>{moment(v.date).format("DD/MM/YYYY")}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <p>No vaccinations found.</p>
+            )}
+
+            <button onClick={closeModal}>Close</button>
+          </div>
+        </div>
+      )}
+      {selectedStudentForVaccination && (
+        <div
+          className="modal-overlay"
+          onClick={() => setSelectedStudentForVaccination(null)}
+        >
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <h3>Vaccinate {selectedStudentForVaccination.name}</h3>
+            <select
+              value={selectedDriveId}
+              onChange={(e) => setSelectedDriveId(e.target.value)}
+            >
+              <option value="">Select a drive</option>
+              {activeDrives.map((drive, i) => (
+                <option key={i} value={drive._id}>
+                  {drive.vaccineName} –{" "}
+                  {new Date(drive.date).toLocaleDateString()}
+                </option>
+              ))}
+            </select>
+            <button onClick={handleMarkVaccinated} disabled={!selectedDriveId}>
+              Submit
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

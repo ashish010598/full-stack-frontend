@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
-import "./DashboardPage.scss";
+import moment from "moment";
 import axios from "axios";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
+
+import "./DashboardPage.scss";
 
 const DashboardPage = () => {
   const [stats, setStats] = React.useState(null);
@@ -35,6 +37,16 @@ const DashboardPage = () => {
   ];
 
   const COLORS = ["#00C49F", "#FF8042"];
+
+  const today = new Date().toDateString();
+
+  const ongoingDrives = stats?.upcomingDrives.filter(
+    (d) => new Date(d.date).toDateString() === today
+  );
+
+  const upcomingDrives = stats?.upcomingDrives.filter(
+    (d) => new Date(d.date) > new Date()
+  );
 
   return (
     <div className="dashboard-container">
@@ -84,19 +96,36 @@ const DashboardPage = () => {
             </div>
 
             <div className="upcoming-box">
+              <h3>⏳ Ongoing Drives</h3>
+              {ongoingDrives.length === 0 ? (
+                <p className="no-drives">No drives for today.</p>
+              ) : (
+                <ul>
+                  {ongoingDrives.map((drive, i) => (
+                    <li key={i}>
+                      <strong>{drive.vaccineName}</strong>
+                      <br />
+                      <span>
+                        Doses: {drive.availableDoses} | Classes:{" "}
+                        {drive.applicableClasses.join(", ")}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              )}
               <h3>📅 Upcoming Drives</h3>
-              {stats.upcomingDrives.length === 0 ? (
+              {upcomingDrives.length === 0 ? (
                 <p className="no-drives">
                   No upcoming drives in the next 30 days.
                 </p>
               ) : (
                 <ul>
-                  {stats.upcomingDrives.map((drive, i) => (
+                  {upcomingDrives.map((drive, i) => (
                     <li key={i}>
                       <strong>{drive.vaccineName}</strong> on{" "}
-                      {new Date(drive.date).toLocaleDateString()} <br />
+                      {moment(drive.date).format("DD/MM/YYYY")} <br />
                       <span>
-                        Doses: {drive.dosesAvailable} | Classes:{" "}
+                        Doses: {drive.availableDoses} | Classes:{" "}
                         {drive.applicableClasses.join(", ")}
                       </span>
                     </li>

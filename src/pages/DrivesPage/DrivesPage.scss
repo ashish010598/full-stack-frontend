@@ -1,0 +1,157 @@
+.drives-page {
+    background: #242424;
+    color: #f1f1f1;
+    padding: 2rem;
+    min-height: 100vh;
+  
+    h2, h3 {
+      margin-bottom: 1rem;
+    }
+  
+    .drive-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+  
+      input, .datepicker {
+        padding: 0.6rem;
+        background: #333;
+        border: 1px solid #555;
+        border-radius: 5px;
+        color: white;
+      }
+  
+      button {
+        padding: 0.6rem 1.2rem;
+        background: #0073e6;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+  
+      .error {
+        color: red;
+        margin-top: 0.5rem;
+      }
+    }
+
+    .drive-filters {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+      
+        select,
+        input,
+        .datepicker {
+          padding: 0.5rem;
+          background: #333;
+          color: white;
+          border: 1px solid #555;
+          border-radius: 5px;
+          font-size: 1rem;
+        }
+      
+        .datepicker {
+          width: 200px;
+        }
+      }
+      
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #333;
+      color: #fff;
+  
+      th, td {
+        padding: 1rem;
+        border-bottom: 1px solid #444;
+        text-align: center;
+      }
+  
+      th {
+        background: #444;
+      }
+  
+      .expired {
+        color: #e74c3c;
+        font-weight: bold;
+      }
+  
+      .upcoming {
+        color: #f1c40f;
+        font-weight: bold;
+      }
+  
+      .in-progress {
+        color: #2ecc71;
+        font-weight: bold;
+      }
+  
+      button {
+        background: #2980b9;
+        color: white;
+        border: none;
+        padding: 0.4rem 0.6rem;
+        border-radius: 4px;
+        cursor: pointer;
+  
+        &:hover {
+          background: #1f6694;
+        }
+      }
+    }
+  
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 10;
+  
+      .modal {
+        background: #2a2a2a;
+        padding: 2rem;
+        border-radius: 10px;
+        min-width: 300px;
+  
+        h3 {
+          margin-bottom: 1rem;
+        }
+  
+        input {
+          width: 100%;
+          margin-bottom: 1rem;
+          padding: 0.5rem;
+          background: #333;
+          border: 1px solid #555;
+          color: white;
+        }
+  
+        button {
+          margin-right: 0.5rem;
+          padding: 0.5rem 1rem;
+          border: none;
+          border-radius: 5px;
+  
+          &:first-of-type {
+            background: #27ae60;
+          }
+  
+          &:last-of-type {
+            background: #c0392b;
+          }
+        }
+  
+        .error {
+          color: red;
+          margin-top: 1rem;
+        }
+      }
+    }
+  }
+  
