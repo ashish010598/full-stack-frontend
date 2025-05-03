@@ -1,12 +1,11 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import React from "react";
 
 const Sidebar = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/login");
+    window.location.href = "/login";
   };
 
   const menu = [

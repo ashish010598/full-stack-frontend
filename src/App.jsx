@@ -21,7 +21,6 @@ function App() {
           <Route index element={<DashboardPage />} />
           <Route path="students" element={<StudentsPage />} />
           <Route path="drives" element={<DrivesPage />} />
-          <Route path="logout" element={<div />} />
         </Route>
 
         {/* Fallback */}
