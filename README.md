@@ -121,6 +121,26 @@ npm run dev
 
 ![alt text](screenshots/login.png)
 
+### 🏠 Dashboard View
+
+![alt text](screenshots/DashboardPage.png)
+
+### 🧑‍🎓 Student Management
+
+![alt text](screenshots/StudentPage.png)
+
+#### ✅ Mark Student Vaccinated
+
+![alt text](screenshots/MarkingStudentVaccinated.png)
+
+### 💉 Drive Management
+
+![alt text](screenshots/DrivePage.png)
+
+#### ✏️ Edit Drive
+
+![alt text](screenshots/EditDrive.png)
+
 ## ✍️ Author
 
 **Ashish Pathak**  
