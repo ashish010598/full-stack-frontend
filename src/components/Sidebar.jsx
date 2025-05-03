@@ -30,6 +30,8 @@ const Sidebar = () => {
         background: "#f3f3f3",
         padding: "1rem",
         boxSizing: "border-box",
+        position: "fixed",
+        top: "0px",
       }}
     >
       <h3 style={{ color: "#000", marginBottom: "50px" }}>💉 Portal</h3>

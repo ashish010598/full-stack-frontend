@@ -1,22 +1,29 @@
-import React from 'react';
-import Sidebar from './Sidebar';
-import { Outlet, useNavigate } from 'react-router-dom';
+import React from "react";
+import Sidebar from "./Sidebar";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const Layout = () => {
   const navigate = useNavigate();
 
   // Handle logout manually
   React.useEffect(() => {
-    if (window.location.pathname === '/logout') {
-      localStorage.removeItem('token');
-      navigate('/login');
+    if (window.location.pathname === "/logout") {
+      localStorage.removeItem("token");
+      navigate("/login");
     }
   }, [navigate]);
 
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: "flex" }}>
       <Sidebar />
-      <div style={{ flex: 1, padding: '2rem' }}>
+      <div
+        style={{
+          flex: 1,
+          padding: "2rem",
+          overflowX: "auto",
+          marginLeft: "250px",
+        }}
+      >
         <Outlet />
       </div>
     </div>

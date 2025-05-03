@@ -13,11 +13,20 @@ This is the **ReactJS frontend** for the **School Vaccination Portal**, designed
 
 ## 🚀 Live Features
 
-✅ Responsive **Login Page**  
-✅ Sidebar Layout using `PrivateRoute`  
-✅ Fully functional **Login Workflow** using Redux & Saga  
-✅ Modular **Redux setup** for Auth, Students, and Drives  
-✅ SCSS-powered layout
+- ✅ Dark UI
+- 🔐 **Login Authentication** (token-based)
+- 🎨 **Responsive Layout** with sidebar navigation
+- 📊 **Dashboard Analytics** with Pie Charts and Drive Status
+- 🧑‍🎓 **Student Management**
+  - List students with vaccination status
+  - Bulk student upload via CSV
+  - Mark students as vaccinated in ongoing drives
+  - Class-based vaccination filtering
+- 💉 **Drive Management**
+  - Create & edit drives with future-date validation
+  - Track drive status: `expired`, `upcoming`, `in-progress`
+  - Filter drives by name, date, and status
+- 🔍 **Search & Filters** for students and drives
 
 ---
 
@@ -33,6 +42,10 @@ frontend/
 │   ├── components/         # Reusable React components (e.g., Sidebar, Header)
 │   ├── pages/              # Page components (e.g., Login, Dashboard, Students)
 │   ├── redux/              # Redux setup (actions, reducers, sagas, store)
+        ├── actions.js/
+        ├── reducer.js/
+        ├── saga.js/
+        ├── types.js/
 │   ├── styles/             # SCSS files for styling
 │   ├── utils/              # Utility functions and helpers
 │   ├── App.jsx             # Main app component
@@ -102,24 +115,11 @@ npm run dev
 
 ---
 
-## ✅ Completed
+## 📷 Screenshots
 
-- Login Page (styled & functional)
-- Sidebar & Layout
-- Routing (Dashboard / Students / Drives)
-- Auth Saga (token + redirects)
-- Redux modules for Student & Drive
-- Vite + SCSS setup
-- Error handling
+### 🔐 Login View
 
-## 🔜 Coming Soon
-
-- 📊 Dashboard with real-time stats
-- 👨‍🎓 Student Management (List, Search, Upload CSV)
-- 💉 Vaccination Drives (Create, Edit, Filter)
-- 📄 Reports (CSV/Excel/PDF downloads)
-
----
+![alt text](screenshots/login.png)
 
 ## ✍️ Author
 
